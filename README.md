@@ -1,5 +1,5 @@
 # scriptomente
-![Scriptomente Logo](Logo.png)
+![Scriptomente Logo](Logo-01.png)
 
 ## About
 The name is derived from the Latin words Scripto (Write) and Mentem (Mind). 
