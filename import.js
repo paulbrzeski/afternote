@@ -77,7 +77,7 @@ xml.on('endElement: note', function(note) {
     original_created: note.created,
     original_updated: note.updated
   }
-  console.log(mapping.data);
+  console.log(mapping.name);
   die();
   
 });
