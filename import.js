@@ -21,7 +21,6 @@ xml.on('updateElement: note', function(note) {
   var mapping = {
     name: note.title,
     data: formatNoteContent(note.content),
-    test: toMarkdown('<h1>Hello world!</h1>'),
     original_created: note.created,
     original_updated: note.updated
   }
