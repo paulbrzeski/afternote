@@ -1,7 +1,29 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('path');
+const { app, BrowserWindow, Menu, dialog } = require('electron');
+const path = require('path'),
+      fs = require('fs'),
+      crypto    = require('crypto'),
+      XmlStream = require('xml-stream');
 const Store = require('./store.js');
 let mainWindow;
+
+const template = [
+  {
+    label: 'File',
+    submenu: [
+      {
+        label: 'Import from Evernote Export (.enex)',
+        click () { handleImport(); }
+      },
+      {
+        role: 'close'
+      }
+    ]
+  },
+  
+]
+
+const menu = Menu.buildFromTemplate(template)
+Menu.setApplicationMenu(menu)
 
 // This is the main store for the application.
 const store = new Store({
@@ -25,8 +47,6 @@ app.on('ready', function() {
   // Pass those values in to the BrowserWindow options
   mainWindow = new BrowserWindow({ /*frame: false, transparent: true,*/ width, height });
 
-  require('./menu/mainmenu');
-
   // The BrowserWindow class extends the node.js core EventEmitter class, so we use that API
   // to listen to events on the BrowserWindow. The resize event is emitted when the window size changes.
   mainWindow.on('resize', () => {
@@ -39,3 +59,8 @@ app.on('ready', function() {
 
   mainWindow.loadURL('file://' + path.join(__dirname, 'index.html'));
 });
+
+function handleImport () {
+  var filename = dialog.showOpenDialog({properties: ['openFile']})[0];
+  console.log(filename);
+}
