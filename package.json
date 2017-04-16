@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/paulbrzeski/Scriptomente#readme",
   "dependencies": {
+    "regex": "^0.1.1",
     "xml-stream": "^0.4.5"
   }
 }
