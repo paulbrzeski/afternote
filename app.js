@@ -1,15 +1,18 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const Store = require('./store.js');
-let mainWindow; //do this so that the window object doesn't get GC'd
+let mainWindow;
 
-// First instantiate the class
+// This is the main store for the application.
 const store = new Store({
   // We'll call our data file 'user-preferences'
   configName: 'user-preferences',
   defaults: {
     // 800x600 is the default size of our window
-    windowBounds: { width: 800, height: 600 }
+    windowBounds: { width: 800, height: 600 },
+    notebooks: {
+      unsorted: []
+    }
   }
 });
 
@@ -20,7 +23,7 @@ app.on('ready', function() {
   let { width, height } = store.get('windowBounds');
 
   // Pass those values in to the BrowserWindow options
-  mainWindow = new BrowserWindow({ width, height });
+  mainWindow = new BrowserWindow({ /*frame: false, transparent: true,*/ width, height });
 
   // The BrowserWindow class extends the node.js core EventEmitter class, so we use that API
   // to listen to events on the BrowserWindow. The resize event is emitted when the window size changes.

@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/paulbrzeski/Scriptomente/issues"
   },
-  "homepage": "https://github.com/paulbrzeski/Scriptomente#readme"
+  "homepage": "https://github.com/paulbrzeski/Scriptomente#readme",
+  "dependencies": {
+    "xml-stream": "^0.4.5"
+  }
 }
