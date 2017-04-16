@@ -5,6 +5,7 @@
 const fs = require('fs'),
       path      = require('path'),
       toMarkdown = require('to-markdown'),
+      crypto    = require('crypto'),
       XmlStream = require('xml-stream');
 
 function formatNoteContent (content) {
@@ -48,11 +49,17 @@ function processResources (raw_resources) {
   resources = {};
   //console.log(raw_resources);
   raw_resources.forEach(function(res){
+    let hash;
     if (!res.recognition) {
-      return;
+      var buf = new Buffer(res.data.$text, 'base64');
+      hash = crypto.createHash('md5')
+        .update(buf, 'utf8')
+        .digest('hex');
     }
-    let rex = /objID="(.*?)"/g;
-    let hash = res.recognition.match(rex)[0].replace('objID=','').replace('"','').replace('"','');
+    else {
+      let rex = /objID="(.*?)"/g;  
+      hash = res.recognition.match(rex)[0].replace('objID=','').replace('"','').replace('"','');
+    }
     resources[hash] = res.data.$text;
   });
   return resources;
