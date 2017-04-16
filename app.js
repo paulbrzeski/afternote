@@ -25,6 +25,8 @@ app.on('ready', function() {
   // Pass those values in to the BrowserWindow options
   mainWindow = new BrowserWindow({ /*frame: false, transparent: true,*/ width, height });
 
+  require('./menu/mainmenu');
+
   // The BrowserWindow class extends the node.js core EventEmitter class, so we use that API
   // to listen to events on the BrowserWindow. The resize event is emitted when the window size changes.
   mainWindow.on('resize', () => {

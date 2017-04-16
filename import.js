@@ -67,30 +67,24 @@ function processResources (raw_resources) {
   return resources;
 }
 
-let filename = process.argv[2];
-var stream = fs.createReadStream(filename);
-var xml = new XmlStream(stream);
-xml.collect('resource'); // Maps multiple 'resource' tags into array
-xml.on('endElement: note', function(note) {
-  console.log(note.title);
-  let source_url = note['note-attributes']['source-url'] ? note['note-attributes']['source-url'] : '';
-  var mapping = {
-    name: note.title,
-    resources: processResources(note.resource),
-    data: formatNoteContent(note.content),
-    original_created: note.created,
-    original_updated: note.updated,
-    source: source_url
-  }
-  
-  //die();
-  
-});
+function importFile(filename) {
+  var stream = fs.createReadStream(filename);
+  var xml = new XmlStream(stream);
+  xml.collect('resource'); // Maps multiple 'resource' tags into array
+  xml.on('endElement: note', function(note) {
+    let source_url = note['note-attributes']['source-url'] ? note['note-attributes']['source-url'] : '';
+    var mapping = {
+      name: note.title,
+      resources: processResources(note.resource),
+      data: formatNoteContent(note.content),
+      original_created: note.created,
+      original_updated: note.updated,
+      source: source_url
+    }
+    
+    //die();
+    
+  });
+}
 
-// // Debug
-// xml.on('error', function(message) {
-//   console.log('Parsing as ' + ('auto') + ' failed: ' + message);
-// });
-// xml.on('data', function(data) {
-//   //process.stdout.write(data);
-// });
+importFile(process.argv[2]);
