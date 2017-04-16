@@ -1,7 +1,9 @@
-# Scriptomente
-A cloud based note taking tool
+# scriptomente
+![Scriptomente Logo](Logo.png)
 
 ## About
+The name is derived from the Latin words Scripto (Write) and Mentem (Mind). 
+
 This is my own spin on a note taking application with cloud sync features. If it works well, I might add some diagramming and drawing features for brainstorms, UI mockups, ERD/DFD/UML, concept drawings, etc.
 
 ## Planned features (in development order)
@@ -10,3 +12,6 @@ This is my own spin on a note taking application with cloud sync features. If it
 - Desktop application using Electron, https://electron.atom.io/
 - Markdown and Image embedding support, live WYSIWYG and code editing
 - Mobile application pending research (suggest me a framework!)
+
+## Thanks etc.
+- Font from http://www.dafont.com/niscript.font?l[]=10&l[]=1
