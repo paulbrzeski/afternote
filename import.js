@@ -17,7 +17,7 @@ function formatNoteContent (content) {
 function replaceMediaTags (content) {
   let pattern = /<en-media ([\s\S]*?)><\/en-media>/g;
   let match = pattern.exec(content);
-  while(match != null) {
+  while (match != null) {
     let [original_element, raw_metadata] = match;
     raw_metadata = raw_metadata.split(' ');
     let metadata = {};
@@ -27,28 +27,52 @@ function replaceMediaTags (content) {
       let parsed_metadata = raw_metadata[keyname].replace('"','').replace('"','').split('=');
       metadata[parsed_metadata[0]] = parsed_metadata[1];
     }
-    console.log(metadata);
+    if (resources[metadata.hash]) {
+      let imageTag = '<img ';
+      imageTag += 'width="' + metadata.width + '" ';
+      imageTag += 'height="' + metadata.height + '" ';
+      imageTag += 'alt="' + metadata.alt + '" ';
+      imageTag += 'src="data:image/png;base64,' + resources[metadata.hash] + '" ';
+      imageTag += " />";
+      content = content.replace(original_element, imageTag);
+    }
+
+    // Continue the loop.
     match = pattern.exec(content);
   }
   return content;
 }
 
+let resources = {};
+function processResources (raw_resources) {
+  resources = {};
+  //console.log(raw_resources);
+  raw_resources.forEach(function(res){
+    if (!res.recognition) {
+      return;
+    }
+    let rex = /objID="(.*?)"/g;
+    let hash = res.recognition.match(rex)[0].replace('objID=','').replace('"','').replace('"','');
+    resources[hash] = res.data.$text;
+  });
+  return resources;
+}
+
 let filename = process.argv[2];
 var stream = fs.createReadStream(filename);
 var xml = new XmlStream(stream);
+xml.collect('resource'); // Maps multiple 'resource' tags into array
 xml.on('endElement: note', function(note) {
   var mapping = {
     name: note.title,
+    resources: processResources(note.resource),
     data: formatNoteContent(note.content),
     original_created: note.created,
     original_updated: note.updated
   }
-  //console.log(mapping);
-  for (var keyname in note) {
-    console.log(keyname);
-  }
-  //console.log(note);
+  console.log(mapping.data);
   die();
+  
 });
 
 // // Debug
