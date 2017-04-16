@@ -1,9 +1,7 @@
 const { app, BrowserWindow, Menu, dialog } = require('electron');
-const path = require('path'),
-      fs = require('fs'),
-      crypto    = require('crypto'),
-      XmlStream = require('xml-stream');
+const path = require('path');
 const Store = require('./store.js');
+const Importer = require('./importer.js');
 let mainWindow;
 
 const template = [

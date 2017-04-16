@@ -1,12 +1,32 @@
-/*
-  Evernote Import script for scriptomente
-  Usage: node import.js <filename.enex>
-*/
+const electron = require('electron');
 const fs = require('fs'),
       path      = require('path'),
-      toMarkdown = require('to-markdown'),
       crypto    = require('crypto'),
       XmlStream = require('xml-stream');
+
+class Importer {
+  constructor(filename) {
+    var stream = fs.createReadStream(filename);
+    var xml = new XmlStream(stream);
+    xml.collect('resource'); // Maps multiple 'resource' tags into array
+    xml.on('endElement: note', function(note) {
+      let source_url = note['note-attributes']['source-url'] ? note['note-attributes']['source-url'] : '';
+      var mapping = {
+        name: note.title,
+        resources: processResources(note.resource),
+        data: formatNoteContent(note.content),
+        original_created: note.created,
+        original_updated: note.updated,
+        source: source_url
+      }
+      
+      //die();
+      
+    });
+  }
+  
+}
+
 
 function formatNoteContent (content) {
   return replaceMediaTags(content.substring(
@@ -67,24 +87,5 @@ function processResources (raw_resources) {
   return resources;
 }
 
-function importFile(filename) {
-  var stream = fs.createReadStream(filename);
-  var xml = new XmlStream(stream);
-  xml.collect('resource'); // Maps multiple 'resource' tags into array
-  xml.on('endElement: note', function(note) {
-    let source_url = note['note-attributes']['source-url'] ? note['note-attributes']['source-url'] : '';
-    var mapping = {
-      name: note.title,
-      resources: processResources(note.resource),
-      data: formatNoteContent(note.content),
-      original_created: note.created,
-      original_updated: note.updated,
-      source: source_url
-    }
-    
-    //die();
-    
-  });
-}
-
-importFile(process.argv[2]);
+// expose the class
+module.exports = Importer;
