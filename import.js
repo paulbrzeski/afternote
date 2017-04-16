@@ -4,13 +4,14 @@
 */
 const fs = require('fs'),
       path      = require('path'),
+      toMarkdown = require('to-markdown'),
       XmlStream = require('xml-stream');
 
 function formatNoteContent (note) {
-  return note.substring(
+  return (note.substring(
     note.indexOf("<en-note>") + "<en-note>".length,
     note.indexOf("</en-note>")
-  );
+  ));
 }
 
 let filename = process.argv[2];
@@ -20,6 +21,7 @@ xml.on('updateElement: note', function(note) {
   var mapping = {
     name: note.title,
     data: formatNoteContent(note.content),
+    test: toMarkdown('<h1>Hello world!</h1>'),
     original_created: note.created,
     original_updated: note.updated
   }
