@@ -47,7 +47,9 @@ function replaceMediaTags (content) {
 let resources = {};
 function processResources (raw_resources) {
   resources = {};
-  //console.log(raw_resources);
+  if (!raw_resources) {
+    return resources;  
+  }
   raw_resources.forEach(function(res){
     let hash;
     if (!res.recognition) {
@@ -70,15 +72,18 @@ var stream = fs.createReadStream(filename);
 var xml = new XmlStream(stream);
 xml.collect('resource'); // Maps multiple 'resource' tags into array
 xml.on('endElement: note', function(note) {
+  console.log(note.title);
+  let source_url = note['note-attributes']['source-url'] ? note['note-attributes']['source-url'] : '';
   var mapping = {
     name: note.title,
     resources: processResources(note.resource),
     data: formatNoteContent(note.content),
     original_created: note.created,
-    original_updated: note.updated
+    original_updated: note.updated,
+    source: source_url
   }
-  console.log(mapping.name);
-  die();
+  
+  //die();
   
 });
 
