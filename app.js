@@ -12,9 +12,11 @@ ipcMain.on('asynchronous-message', (event, arg) => {
   event.sender.send('asynchronous-reply', 'pong')
 })
 
-ipcMain.on('synchronous-message', (event, arg) => {
-  console.log(arg)  // prints "ping"
-  event.returnValue = 'pong'
+ipcMain.on('client-event', (event, arg) => {
+  switch(arg) {
+    case 'ready':
+    event.returnValue = store.get('notebooks');
+  }
 })
 
 const template = [
@@ -66,7 +68,6 @@ const store = new Store({
 
 // When our app is ready, we'll create our BrowserWindow
 app.on('ready', function() {
-  console.log(store);
   // First we'll get our height and width. This will be the defaults if there wasn't anything saved
   let { width, height } = store.get('windowBounds');
 
@@ -89,6 +90,7 @@ app.on('ready', function() {
 function handleImport () {
   var filename = dialog.showOpenDialog({properties: ['openFile']})[0];
   
+  // This callback definition should probably live in the store class... yolo.
   var cb = function(result) {
     result.forEach(function(note){
       /*
@@ -99,10 +101,11 @@ function handleImport () {
           original_updated: note.updated,
           source: source_url
       */
-      let destination_file = note.name.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.json';
+      let destination_file = note.name.replace(/[^a-z0-9]/gi, '_').toLowerCase().substring(0,200) + '.json';
       fs.writeFileSync(path.join(store.data_dir, destination_file), JSON.stringify(note.data));
 
       let notebooks = store.get('notebooks');
+      // Assuming notes with the same name should be overridden, for now.
       if (notebooks.unsorted[note.name]) {
         console.log('Import is replacing existing note - "' + note.name + '"');
       }
