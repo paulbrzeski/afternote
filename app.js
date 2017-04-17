@@ -59,7 +59,7 @@ const store = new Store({
   configName: 'user-preferences',
   defaults: {
     // 800x600 is the default size of our window
-    windowBounds: { width: 800, height: 600 },
+    windowBounds: { width: 417, height: 475 },
     notebooks: {
       unsorted: {}
     }
@@ -72,7 +72,7 @@ app.on('ready', function() {
   let { width, height } = store.get('windowBounds');
 
   // Pass those values in to the BrowserWindow options
-  mainWindow = new BrowserWindow({ /*frame: false, transparent: true,*/ width, height });
+  mainWindow = new BrowserWindow({ /*frame: false, transparent: true,*/ width, height, icon: 'assets/Logo_Icon.png' });
 
   // The BrowserWindow class extends the node.js core EventEmitter class, so we use that API
   // to listen to events on the BrowserWindow. The resize event is emitted when the window size changes.

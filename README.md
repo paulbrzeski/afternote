@@ -1,5 +1,5 @@
 # scriptomente
-![Scriptomente Logo](/assets/Logo-01.png)
+![Scriptomente Logo](/assets/Logo_Colour.png)
 
 ## About
 The name is derived from the Latin words Scripto (Write) and Mentem (Mind). 

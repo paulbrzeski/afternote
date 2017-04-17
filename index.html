@@ -6,11 +6,7 @@
     <link rel="stylesheet" href="semantic/dist/semantic.min.css" />
   </head>
   <body>
-  	<script>
-  		
-
-  	</script>
-    <img src="assets/Logo-01.png" />
+  	<div id="container"></div>
   </body>
   <!-- Insert this line above script imports  -->
   <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
@@ -18,14 +14,5 @@
   <script src="semantic/dist/semantic.js"></script> 
   <!-- Insert this line after script imports -->
   <script>if (window.module) module = window.module;</script>
-  <script>
-  	// In renderer process (web page).
-	const {ipcRenderer} = require('electron')
-	console.log(ipcRenderer.sendSync('client-event', 'ready')) // prints "pong"
-
-	ipcRenderer.on('asynchronous-reply', (event, arg) => {
-	  console.log(arg) // prints "pong"
-	})
-	ipcRenderer.send('asynchronous-message', 'ping')
-  </script>
+  <script src="src/main.js"></script>
 </html>
