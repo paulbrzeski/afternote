@@ -4,7 +4,7 @@
   "description": "A note taking tool",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,9 @@
   "dependencies": {
     "crypto": "0.0.3",
     "xml-stream": "^0.4.5"
+  },
+  "devDependencies": {
+    "electron-rebuild": "^1.5.7",
+    "electron": "~1.6.2"
   }
 }

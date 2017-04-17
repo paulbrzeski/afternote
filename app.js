@@ -60,5 +60,6 @@ app.on('ready', function() {
 
 function handleImport () {
   var filename = dialog.showOpenDialog({properties: ['openFile']})[0];
-  console.log(filename);
+  var file = new Importer(filename);
+  //console.log(file);
 }

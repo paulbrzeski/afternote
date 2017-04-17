@@ -10,6 +10,7 @@ class Importer {
     var xml = new XmlStream(stream);
     xml.collect('resource'); // Maps multiple 'resource' tags into array
     xml.on('endElement: note', function(note) {
+      console.log(note.title);
       let source_url = note['note-attributes']['source-url'] ? note['note-attributes']['source-url'] : '';
       var mapping = {
         name: note.title,
