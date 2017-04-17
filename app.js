@@ -7,10 +7,10 @@ let mainWindow;
 
 // In main process.
 const {ipcMain} = require('electron')
-ipcMain.on('asynchronous-message', (event, arg) => {
-  console.log(arg)  // prints "ping"
-  event.sender.send('asynchronous-reply', 'pong')
-})
+// ipcMain.on('asynchronous-message', (event, arg) => {
+//   console.log(arg)  // prints "ping"
+//   event.sender.send('asynchronous-reply', 'pong')
+// })
 
 ipcMain.on('client-event', (event, arg) => {
   switch(arg) {
@@ -18,6 +18,11 @@ ipcMain.on('client-event', (event, arg) => {
     event.returnValue = store.get('notebooks');
   }
 })
+
+ipcMain.on('load', (event, arg) => {
+  event.returnValue = JSON.parse(fs.readFileSync(path.join(store.data_dir,arg)));
+})
+
 
 const template = [
   {

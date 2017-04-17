@@ -13,12 +13,14 @@ This is my own spin on a note taking application with cloud sync features. If it
 - Markdown and Image embedding support, live WYSIWYG and code editing
 - Mobile application pending research (suggest me a framework!)
 
-## Mockups
-#### Small Window - Expanded
+## Screenshots and Mockups
+#### Screenshot - First ever!
+![20170418 Screenshot](/assets/20170418 Screenshot.png)
+#### Mockup - Small Window - Expanded
 ![Small Window - Expanded](/assets/App-01.png)
-#### Small Window - Collapsed
+#### Mockup - Small Window - Collapsed
 ![Small Window - Collapsed](/assets/App-03.png)
-#### Large Window
+#### Mockup - Large Window
 ![Large Window](/assets/App-02.png)
 
 ## Thanks etc.

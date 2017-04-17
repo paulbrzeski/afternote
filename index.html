@@ -6,7 +6,23 @@
     <link rel="stylesheet" href="semantic/dist/semantic.min.css" />
   </head>
   <body>
-  	<div id="container"></div>
+    <div class="ui padded grid">
+      <div class="black two wide column">
+        <div class="ui relaxed list">
+          <div class="item">
+            <div class="content">Unsorted</div>
+          </div>
+          <div class="item">
+            <div class="content">Work</div>
+          </div>
+          <div class="item">
+            <div class="content">Web Clips</div>
+          </div>
+        </div>
+      </div>
+      <div id="notes" class="grey three wide column"></div>
+    	<div id="active" class="eleven wide column"></div>
+    </div>
   </body>
   <!-- Insert this line above script imports  -->
   <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
