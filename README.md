@@ -14,8 +14,8 @@ This is my own spin on a note taking application with cloud sync features. If it
 - Mobile application pending research (suggest me a framework!)
 
 ## Screenshots and Mockups
-#### Screenshot - First ever!
-![20170418 Screenshot](/assets/20170418 Screenshot.png)
+#### Screenshot - First ever
+![20170418 Screensho](/assets/20170418-Screenshot.png)
 #### Mockup - Small Window - Expanded
 ![Small Window - Expanded](/assets/App-01.png)
 #### Mockup - Small Window - Collapsed
