@@ -1,5 +1,6 @@
 const { app, BrowserWindow, Menu, dialog } = require('electron');
 const path = require('path');
+const fs = require('fs');
 const Store = require('./store.js');
 const Importer = require('./importer.js');
 let mainWindow;
@@ -11,6 +12,21 @@ const template = [
       {
         label: 'Import from Evernote Export (.enex)',
         click () { handleImport(); }
+      },
+      {
+        label: 'Toggle Developer Tools',
+        accelerator: (function () {
+          if (process.platform === 'darwin') {
+            return 'Alt+Command+I'
+          } else {
+            return 'Ctrl+Shift+I'
+          }
+        })(),
+        click: function (item, focusedWindow) {
+          if (focusedWindow) {
+            focusedWindow.toggleDevTools()
+          }
+        }
       },
       {
         role: 'close'
@@ -31,7 +47,7 @@ const store = new Store({
     // 800x600 is the default size of our window
     windowBounds: { width: 800, height: 600 },
     notebooks: {
-      unsorted: []
+      unsorted: {}
     }
   }
 });
@@ -60,6 +76,34 @@ app.on('ready', function() {
 
 function handleImport () {
   var filename = dialog.showOpenDialog({properties: ['openFile']})[0];
-  var file = new Importer(filename);
-  //console.log(file);
+  
+  var cb = function(result) {
+    result.forEach(function(note){
+      /*
+        Variables: Original location
+          name: note.title,
+          data: formatNoteContent(note.content),
+          original_created: note.created,
+          original_updated: note.updated,
+          source: source_url
+      */
+      let destination_file = note.name.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.json';
+      fs.writeFileSync(path.join(store.data_dir, destination_file), JSON.stringify(note.data));
+
+      let notebooks = store.get('notebooks');
+      if (notebooks.unsorted[note.name]) {
+        console.log('Import is replacing existing note - "' + note.name + '"');
+      }
+      notebooks.unsorted[note.name] = {
+        filename: destination_file,
+        original_created: note.original_created,
+        original_updated: note.original_updated,
+        source: note.source
+      };
+      
+      store.set('notebooks', { unsorted: notebooks.unsorted });
+    });
+  }
+  new Importer(filename, cb);
+  
 }

@@ -5,24 +5,23 @@ const fs = require('fs'),
       XmlStream = require('xml-stream');
 
 class Importer {
-  constructor(filename) {
-    var stream = fs.createReadStream(filename);
-    var xml = new XmlStream(stream);
+  constructor(filename, callback) {
+    let stream = fs.createReadStream(filename);
+    let xml = new XmlStream(stream);
+    let result = [];    
     xml.collect('resource'); // Maps multiple 'resource' tags into array
     xml.on('endElement: note', function(note) {
-      console.log(note.title);
       let source_url = note['note-attributes']['source-url'] ? note['note-attributes']['source-url'] : '';
-      var mapping = {
+      result.push({
         name: note.title,
-        resources: processResources(note.resource),
         data: formatNoteContent(note.content),
         original_created: note.created,
         original_updated: note.updated,
         source: source_url
-      }
-      
-      //die();
-      
+      });
+    });
+    xml.on('end', function() {
+      callback(result);
     });
   }
   
@@ -73,6 +72,7 @@ function processResources (raw_resources) {
   }
   raw_resources.forEach(function(res){
     let hash;
+    // Only generate the hash if its missing.
     if (!res.recognition) {
       var buf = new Buffer(res.data.$text, 'base64');
       hash = crypto.createHash('md5')

@@ -18,6 +18,7 @@
   "homepage": "https://github.com/paulbrzeski/Scriptomente#readme",
   "dependencies": {
     "crypto": "0.0.3",
+    "semantic-ui": "^2.2.10",
     "xml-stream": "^0.4.5"
   },
   "devDependencies": {
