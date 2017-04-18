@@ -11,6 +11,7 @@ class Importer {
     let result = [];    
     xml.collect('resource'); // Maps multiple 'resource' tags into array
     xml.on('endElement: note', function(note) {
+      processResources(note.resource);
       let source_url = note['note-attributes']['source-url'] ? note['note-attributes']['source-url'] : '';
       result.push({
         name: note.title,

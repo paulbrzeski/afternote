@@ -20,7 +20,7 @@ ipcMain.on('client-event', (event, arg) => {
 })
 
 ipcMain.on('load', (event, arg) => {
-  event.returnValue = JSON.parse(fs.readFileSync(path.join(store.data_dir,arg)));
+  event.returnValue = fs.readFileSync(path.join(store.data_dir,arg)).toString();
 })
 
 
@@ -107,7 +107,7 @@ function handleImport () {
           source: source_url
       */
       let destination_file = note.name.replace(/[^a-z0-9]/gi, '_').toLowerCase().substring(0,200) + '.json';
-      fs.writeFileSync(path.join(store.data_dir, destination_file), JSON.stringify(note.data));
+      fs.writeFileSync(path.join(store.data_dir, destination_file), note.data);
 
       let notebooks = store.get('notebooks');
       // Assuming notes with the same name should be overridden, for now.
