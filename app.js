@@ -111,17 +111,18 @@ function handleImport () {
 
       let notebooks = store.get('notebooks');
       // Assuming notes with the same name should be overridden, for now.
-      if (notebooks.unsorted[note.name]) {
+      console.log(notebooks);
+      if (notebooks.Unsorted[note.name]) {
         console.log('Import is replacing existing note - "' + note.name + '"');
       }
-      notebooks.unsorted[note.name] = {
+      notebooks.Unsorted[note.name] = {
         filename: destination_file,
         original_created: note.original_created,
         original_updated: note.original_updated,
         source: note.source
       };
       
-      store.set('notebooks', { unsorted: notebooks.unsorted });
+      store.set('notebooks', { Unsorted: notebooks.Unsorted });
     });
   }
   new Importer(filename, cb);
