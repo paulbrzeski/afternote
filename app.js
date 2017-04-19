@@ -66,7 +66,7 @@ const store = new Store({
     // 800x600 is the default size of our window
     windowBounds: { width: 417, height: 475 },
     notebooks: {
-      unsorted: {}
+      'Unsorted': {}
     }
   }
 });
