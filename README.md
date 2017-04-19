@@ -1,8 +1,8 @@
-# scriptomente
-![Scriptomente Logo](/assets/Logo_Colour.png)
+# afternote
+![afternote Logo](/assets/Logo_Colour.png)
 
 ## About
-The name is derived from the Latin words Scripto (Write) and Mentem (Mind). 
+A desktop (and hopefully mobile) app that can use file or Google Drive based storage.
 
 This is my own spin on a note taking application with cloud sync features. If it works well, I might add some diagramming and drawing features for brainstorms, UI mockups, ERD/DFD/UML, SPF30+, etc.
 
@@ -22,6 +22,3 @@ This is my own spin on a note taking application with cloud sync features. If it
 ![Small Window - Collapsed](/assets/App-03.png)
 #### Mockup - Large Window
 ![Large Window](/assets/App-02.png)
-
-## Thanks etc.
-- Font from http://www.dafont.com/niscript.font?l[]=10&l[]=1
