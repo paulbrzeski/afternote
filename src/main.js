@@ -19,7 +19,9 @@ function buildNotebookList (notebooks) {
       'data-bookname': bookname,
       href: '#',
       style: 'text-transform: capitalize',
-      text: bookname
+      html: $('<a/>', {
+        html: bookname + '<i class="edit icon right floated"></i>'
+      })
     });
     $link.click(clickHandler);
     $list.append($('<div/>', {
