@@ -5,12 +5,11 @@
     <title>afternote alpha</title>
     <link rel="stylesheet" href="semantic/dist/semantic.min.css" />
   </head>
-  <body>
-    <div class="ui padded grid">
-      <div id="notebooks" class="black two wide column"></div>
-      <div id="notes" class="grey four wide column"></div>
-    	<div id="active" class="ten wide column"></div>
-    </div>
+  <body id="context" class="ui padded grid">
+    <div id="notebooks" class="black ui sidebar visible two wide column"></div>
+    <!-- <div id="notes" class="grey ui sidebar visible four wide column sticky"></div> -->
+    <div id="active" class="pusher ten wide column"></div>
+    
   </body>
   <!-- Insert this line above script imports  -->
   <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
