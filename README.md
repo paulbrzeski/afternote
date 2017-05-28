@@ -13,6 +13,10 @@ This is my own spin on a note taking application with cloud sync features. If it
 - Markdown and Image embedding support, live WYSIWYG and code editing
 - Mobile application pending research (suggest me a framework!)
 
+## Brainstorm (23/5/2017)
+So after a bit of reflection on my own needs.. I did a brainstorm and decide that afternote needs more indie game dev support abilities.. so I'm working towards that end. 
+![Afternote Brainstorm](afternote.png)
+
 ## Screenshots and Mockups
 #### Screenshot - First ever
 ![20170418 Screensho](/assets/20170418-Screenshot.png)

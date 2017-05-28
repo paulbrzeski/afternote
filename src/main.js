@@ -13,23 +13,22 @@ $('.ui.sticky > div').sticky({
 
 function buildNotebookList (notebooks) {
   let $list = $("<div/>", {
-    class: 'ui relaxed link list inverted'
+    class: 'ui vertical inverted menu overlay visible fixed sticky'
   });
 
   let firstLoaded = false;
   for (var bookname in notebooks) {
     let $link = $('<a/>', {
-      class: 'content',
       'data-bookname': bookname,
       href: '#',
       style: 'text-transform: capitalize',
       html: $('<a/>', {
+        class: 'item',
         html: bookname + '<i class="edit icon right floated"></i>'
       })
     });
     $link.click(clickHandler);
     $list.append($('<div/>', {
-      class: 'item',
       html: $link
     }));
 
@@ -39,6 +38,9 @@ function buildNotebookList (notebooks) {
     }
   }
   $list.appendTo('#notebooks');
+  $('.ui.sticky').sticky({
+    context: '#context'
+  })
 }
 
 function clickHandler(e) {
@@ -70,6 +72,9 @@ function buildNoteList (bookname, books) {
   }
   
   $('#notes').html($list);
+  $('.ui.sticky')
+    .sticky('refresh')
+  ;
 }
 
 function loadNote (filename) {
