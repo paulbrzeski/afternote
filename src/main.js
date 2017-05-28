@@ -2,6 +2,10 @@
 const {ipcRenderer} = require('electron')
 let notebooks = ipcRenderer.sendSync('client-event', 'ready');
 buildNotebookList(notebooks);
+
+$('.ui.sticky > div').sticky({
+  context: '.ui.padded.grid'
+});
 // ipcRenderer.on('asynchronous-reply', (event, arg) => {
 //   console.log(arg) // prints "pong"
 // })
@@ -70,4 +74,5 @@ function buildNoteList (bookname, books) {
 
 function loadNote (filename) {
   $('#active').html(ipcRenderer.sendSync('load', filename));
+  $('.ui.sticky > div').sticky('refresh');
 }

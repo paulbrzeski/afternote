@@ -26,6 +26,7 @@ ipcMain.on('load', (event, arg) => {
 
 const template = [
   {
+    role: 'window',
     label: 'File',
     submenu: [
       {
@@ -55,8 +56,22 @@ const template = [
   
 ]
 
-const menu = Menu.buildFromTemplate(template)
-Menu.setApplicationMenu(menu)
+// Dodgy workaround for dodgy electron implementation of OSX toolbar.
+if (process.platform === 'darwin') {
+  const name = app.getName()
+  template.unshift({
+    label: name,
+    submenu: [{
+      label: `About ${name}`,
+      role: 'about'
+    }]
+  });
+}
+
+app.on('ready', function () {
+  const menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
+})
 
 // This is the main store for the application.
 const store = new Store({
