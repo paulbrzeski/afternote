@@ -1,3 +1,6 @@
+/**
+ * Afternote application.
+**/
 const { app, BrowserWindow, Menu, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');

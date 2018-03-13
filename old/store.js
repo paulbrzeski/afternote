@@ -1,4 +1,8 @@
-// Courtesy of https://gist.github.com/ccnokes/95cb454860dbf8577e88d734c3f31e08#file-store-js
+/**
+ * Store class.
+ *
+ * Courtesy of https://gist.github.com/ccnokes/95cb454860dbf8577e88d734c3f31e08#file-store-js
+**/
 
 const electron = require('electron');
 const path = require('path');

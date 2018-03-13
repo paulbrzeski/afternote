@@ -1,4 +1,6 @@
-// In renderer process (web page).
+/**
+ * Afternote browser client.
+**/
 const {ipcRenderer} = require('electron')
 let notebooks = ipcRenderer.sendSync('client-event', 'ready');
 buildNotebookList(notebooks);
