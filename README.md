@@ -2,7 +2,7 @@
 ![afternote Logo](/assets/Logo_Colour.png)
 
 ## About
-A desktop (and hopefully mobile) app that can use file or Google Drive based storage.
+A web app that can use Google Drive for cloud storage.
 
 This is my own spin on a note taking application with cloud sync features. If it works well, I might add some diagramming and drawing features for brainstorms, UI mockups, ERD/DFD/UML, SPF30+, etc.
 
